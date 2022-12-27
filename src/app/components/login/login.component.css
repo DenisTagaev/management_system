@@ -1,0 +1,8 @@
+.btn-md{
+    background-color: #477cb2;
+    color: #eee;
+    font-weight: 600;
+}
+a.fs-5.text-dark:hover{
+    color: red!important;
+}

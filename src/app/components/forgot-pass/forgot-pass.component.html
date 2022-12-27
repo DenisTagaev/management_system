@@ -6,20 +6,20 @@
                 <div class="card-body">
                     <form>
                         <div class="mb-3">
-                            <h4 class="text-dark text-muted">Restore password</h4>
+                            <h4 class="text-dark text-muted"></h4>
                         </div>
                         <div class="mb-3">
-                            <label for="InputEmail1" class="form-label">Email</label>
+                            <label for="InputEmail1" class="form-label">Email адреса</label>
                             <input type="email" id="InputEmail1" class="form-control" name="email" placeholder="Email"
                                 [(ngModel)]="email">
                         </div>
                         <div class="row">
                             <div class="col-md-8 mt-2 ">
-                                <a href="/login" class="link-danger fw-bold">Back to Login</a>
+                                <a href="/login" class="link-danger fw-bold">Повернутися до входу</a>
                             </div>
                             <div class=" d-flex col-md-4 justify-content-end">
-                                <button type="button" class="btn btn-primary btn-md" (click)="restorePassword()">Send
-                                    Link</button>
+                                <button type="button" class="btn px-4 btn-md" (click)="restorePassword()">Надiслати 
+                                    посилання</button>
                             </div>
                         </div>
                     </form>

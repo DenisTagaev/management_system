@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 import { FormsModule } from '@angular/forms';
 
+import { FirestoreService } from './shared/services/firestore.service';
 import { FirebaseService } from './shared/services/firebase.service';
 import { AuthService } from './shared/services/auth.service';
 
@@ -20,6 +21,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AddNewComponent } from './components/add-new/add-new.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     SignupComponent,
     ForgotPassComponent,
     DashboardComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavbarComponent,
+    AddNewComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AngularFireDatabaseModule,
     FormsModule,
   ],
-  providers: [AuthService, FirebaseService],
+  providers: [AuthService, FirebaseService, FirestoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,18 @@
+button{
+    font-weight:600;
+}
+button.position-relative{
+    background-color: #477cb2;
+    color: #eee;
+}
+button.position-relative:hover{
+    background-color: #fff;
+    color: #477cb2;
+}
+button.admin{
+    color: #477cb2;
+}
+button.admin:hover {
+    background-color: #477cb2;
+    color: #eee;
+}

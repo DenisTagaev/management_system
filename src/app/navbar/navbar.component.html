@@ -1,0 +1,31 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light border border-bottom-1">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="activebutton">
+                <img src="../../assets/logo.png" alt="university logo" width="90" height="90">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-lg-flex justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item" *ngIf="showButton">
+                        <button class="btn admin btn-lg" routerLink="/new" routerLinkActive="activebutton">
+                            Додати користувача
+                        </button>
+                    </li>
+
+                </ul>
+                <div>
+                    <button class="btn btn-lg me-3 px-4 position-relative" (click)="logout()">
+                        <!-- <i style="font-size:30px" class="fa-regular fa-right-to-bracket"></i> -->
+                        <!-- <i style="font-size:30px" class="fa fa-cart-plus"></i> -->
+                        Вийти
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+

@@ -1,0 +1,17 @@
+/* html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    padding-top: 1%;
+    /* position: fixed; */
+    /* display: flex; */
+    /* bottom: 0; */
+    /* right: 40%; */
+    /* text-align: center;
+    color:  #477cb2;
+    flex-shrink: 0;
+} */ 

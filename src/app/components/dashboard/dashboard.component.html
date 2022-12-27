@@ -1,2 +1,297 @@
-<p>dashboard works!</p>
-<button type="button" class="btn btn-info" (click)="logout()">Logout</button>
+<app-navbar></app-navbar>
+<!-- <button (click)="getStudents()">Show</button> -->
+<div class="row">
+    <div class="wrapper col-sm-12 col-md-2">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            
+            <ul class="list-unstyled components border border-right-1">
+
+                <li>
+                    <a href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="true"
+                        class="dropdown-toggle">Факультети</a>
+                        <ul class="collapse list-unstyled show" id="pageSubmenu">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link" role="button" id="v-pills-all-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-all" role="tab" aria-controls="v-pills-all"
+                                aria-selected="true">Усi Факультети</a>
+                            <a class="nav-link" role="button" id="v-pills-akt-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-akt" role="tab" aria-controls="v-pills-akt"
+                                aria-selected="false">АКТ</a>
+                            <a class="nav-link" role="button" id="v-pills-ЕЛБI-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-ЕЛБI" type="button" role="tab" aria-controls="v-pills-ЕЛБI"
+                                aria-selected="false">ЕЛБI</a>
+                            <a class="nav-link" role="button" id="v-pills-IК-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-IК" type="button" role="tab" aria-controls="v-pills-IК"
+                                aria-selected="false">IК</a>
+                            <a class="nav-link" role="button" id="v-pills-IРТЗI-tab" data-bs-toggle="pill" 
+                                data-bs-target="#v-pills-IРТЗI" type="button" role="tab" aria-controls="v-pills-IРТЗI"
+                                aria-selected="false">IРТЗI</a>
+                            <a class="nav-link" role="button" id="v-pills-IТМ-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-IТМ" type="button" role="tab" aria-controls="v-pills-IТМ"
+                                aria-selected="false">IТМ</a>
+                            <a class="nav-link" role="button" id="v-pills-kn-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-kn" type="button" role="tab" aria-controls="v-pills-kn"
+                                aria-selected="false">КН</a>
+                            <a class="nav-link" role="button" id="v-pills-КIУ-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-КIУ" type="button" role="tab" aria-controls="v-pills-КIУ"
+                                aria-selected="false">КIУ</a>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="tab-content bd-content col-sm-12 col-md-10" id="v-pills-tabContent">
+        <div class="tab-pane fade p-4 active show" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+            <div class="container">
+
+                <h2>Усi Факультети</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="border-top-left-radius: 0.5em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.5em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <td class="text-center">{{student.faculty}}</td>
+                            <td class="text-center">{{student.group}}</td>
+                            <td class="text-center"><a [routerLink]="['/details', student.id]">{{student.name}}</a></td>
+                            <td class="text-center">{{student.term1.average}}</td>
+                            <td class="text-center">{{student.term2.average}}</td>
+                            <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade p-4" id="v-pills-akt" role="tabpanel" aria-labelledby="v-pills-akt-tab">
+            <div class="container">
+            
+                <h2>АКТ</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'АКТ'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade p-4" id="v-pills-kn" role="tabpanel" aria-labelledby="v-pills-kn-tab">
+            <div class="container">
+            
+                <h2>КН</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'КН'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade p-4" id="v-pills-КIУ" role="tabpanel" aria-labelledby="v-pills-КIУ-tab">
+            <div class="container">
+        
+                <h2>КIУ</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'КIУ'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade p-4" id="v-pills-IК" role="tabpanel" aria-labelledby="v-pills-IК-tab">
+            <div class="container">
+        
+                <h2>IК</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'IК'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center"><a [routerLink]="['/details', student.id]">{{student.name}}</a></td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade p-4" id="v-pills-IРТЗI" role="tabpanel" aria-labelledby="v-pills-IРТЗI-tab">
+            <div class="container">
+        
+                <h2>IРТЗI</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'IРТЗI'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade p-4" id="v-pills-IТМ" role="tabpanel" aria-labelledby="v-pills-IТМ-tab">
+            <div class="container">
+        
+                <h2>IТМ</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'IТМ'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade p-4" id="v-pills-ЕЛБI" role="tabpanel" aria-labelledby="v-pills-ЕЛБI-tab">
+            <div class="container">
+        
+                <h2>ЕЛБI</h2>
+                <table class="table table-light table-sm table-striped">
+                    <thead>
+                        <tr class="table-primary">
+                            <th class="text-center" style="border-top-left-radius: 0.35em;">Фак-т</th>
+                            <th class="text-center">Група</th>
+                            <th class="text-center">ПIБ студента</th>
+                            <th class="text-center">Сер. бал за I семестр</th>
+                            <th class="text-center">Сер. бал за II семестр</th>
+                            <th class="text-center" style="border-top-right-radius: 0.35em;">Прогнозована оцiнка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentsList">
+                            <ng-container *ngIf="student.faculty == 'ЕЛБI'">
+                                <td class="text-center">{{student.faculty}}</td>
+                                <td class="text-center">{{student.group}}</td>
+                                <td class="text-center">{{student.name}}</td>
+                                <td class="text-center">{{student.term1.average}}</td>
+                                <td class="text-center">{{student.term2.average}}</td>
+                                <td class="text-center">{{student.projectedMark.toFixed(3)}}</td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer border border-top-1">
+    <h3>NURE design 2022</h3>
+    <p>© All rights reserved</p>
+</footer>

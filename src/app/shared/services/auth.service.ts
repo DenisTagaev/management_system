@@ -1,9 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { user } from '@angular/fire/auth';
+// import { user } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
+// import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +12,24 @@ import { User } from '../interfaces/user';
 
 export class AuthService {
   userData!: firebase.default.User;
+  // user: object = {role: '', uid: '', email: ''};
 
-  constructor(private authService: AngularFireAuth,
-    private firestore: AngularFirestore,
+  constructor(private _authService: AngularFireAuth,
+    private _firestore: AngularFirestore,
     private router: Router) { 
-      this.authService.authState.subscribe((user) => {
+      this._authService.authState.subscribe((user) => {
         if(user){
           this.userData = user;
+          user.email === "admin@mail.com" ? localStorage.setItem('privileged', '1') : false;
           localStorage.setItem('user', JSON.stringify(this.userData));
           this.router.navigate(['/dashboard']);
         } else localStorage.setItem('user', 'null');
       })
   }
+
   setUserData(user: firebase.default.User) {
     const userRef : AngularFirestoreDocument<any> = 
-      this.firestore.doc(`users/${user.uid}`);
+      this._firestore.doc(`users/${user.uid}`);
     
     const User: User = {
       uid: user.uid,
@@ -41,10 +45,13 @@ export class AuthService {
 
   //firebase login 
   login(email: string, password: string) {
-    this.authService.signInWithEmailAndPassword(email, password)
-      .then((result) => {
+    this._authService.signInWithEmailAndPassword(email, password)
+      .then(async(result) => {
+
         this.setUserData(result.user!);
-        this.authService.authState.subscribe((user) => {
+        result.user?.email === "admin@mail.com" ? localStorage.setItem('privileged', '1') : false;
+
+        this._authService.authState.subscribe((user) => {
           user ? this.router.navigate(['/dashboard']) :
           this.router.navigate(['/login']);
         })
@@ -57,9 +64,9 @@ export class AuthService {
   }
   //firebase register
   register(email: string, password: string) {
-    this.authService.createUserWithEmailAndPassword(email, password)
+    this._authService.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        alert('User registered!');
+        alert('User registered!');       
         this.setUserData(result.user!);
         // this.router.navigate(['/login']);
       }, err => {
@@ -67,13 +74,16 @@ export class AuthService {
           this.router.navigate(['/signup']);
       })
       .catch(err => console.log(err));
+    
+    // this._firestore.collection("users").get()
   }
   //sign out
   signOut() {
-    this.authService.signOut()
+    this._authService.signOut()
       .then(() => {
         alert('You have signed out!');
         localStorage.removeItem('user');
+        localStorage.removeItem('privileged');
         this.router.navigate(['/login']);
       }, err => {
         alert(err.message);
@@ -82,7 +92,7 @@ export class AuthService {
   }
   //restorePassword
   restorePassword(email: string) {
-    this.authService.sendPasswordResetEmail(email)
+    this._authService.sendPasswordResetEmail(email)
       .then(() => {
         alert('Restore Letter has been send');
         this.router.navigate(['/login']);
