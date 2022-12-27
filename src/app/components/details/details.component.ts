@@ -10,6 +10,7 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
 export class DetailsComponent implements OnInit {
   private _students: Array<any> = [];
   public student: any;
+  public showButton: boolean = false;
   
   constructor(private _firestore: FirestoreService,
     private _route: ActivatedRoute, private _router: Router) { }
@@ -22,6 +23,7 @@ export class DetailsComponent implements OnInit {
     this.student = this._students.find((s) =>
         s.id == studentIdFromRoute
     );
+    this.showButton = localStorage.getItem('privileged') === '1'? true: false;
   }
 
   dropStudent(id: string) {
