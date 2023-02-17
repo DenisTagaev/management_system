@@ -69,16 +69,13 @@ export class AddNewComponent implements OnInit {
   constructor(private firestoreService: FirestoreService,
     private router: Router) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
   }
 
   addStudent() {
     this.student.term1.average = this.countAverageMark(this.countCoef(this.student.term1), +this.student.term1.extra);
     this.student.term2.average = this.countAverageMark(this.countCoef(this.student.term2), +this.student.term2.extra)
     this.student.projectedMark = this.calculateProjectedMark(this.student.term1, this.student.term2);
-    // console.log(this.student);
-    this.firestoreService.addStudent(this.student);
-    this.router.navigate(['/dashboard']);
   }
 
   countAverageMark(Sum:number, extra:number):number {
@@ -99,22 +96,13 @@ export class AddNewComponent implements OnInit {
     return result;
   }
 
-  calculateProjectedMark(term1: any, term2: any) :number{
-    //прогнозована оцинка
-    let projectedMark: number = 0;
-    //ризниця миж оцинками за 2 семестри перемножиними на их коэфициент
-    let difference:number = 0;
-    //Робиться перебир оцинок. Кожна з оцинок перемножуэться на коефициент та поривнюэться з оцинкой минулого семестра.
-    //Для кореляции складности предмету та ризници оцинок за 2 семестри, умовний бал 0.5 помножений на коефициент
-    //складности додаэться на користь студента. Таким чином, навить якщо середний бал студента у 2 семестри гирший
-    //за попередний, але оцинки за складни предмети покращилися - прогнозована оцинка буде вищою
-    for(let i:number = 1; i <= 5; i++) {
+  calculateProjectedMark(term1: any, term2: any) :number{    let projectedMark: number = 0;
+    let difference:number = 0;    for(let i:number = 1; i <= 5; i++) {
       difference+= (term2[`mark${i}`]*term2[`coef${i}`]+0.5*term2[`coef${i}`]) -
         (term1[`mark${i}`]*term1[`coef${i}`]);
     }
-    //За статистикою ризниця середньои оцинки за 2 семестри бильш ниж у 10 балив э маловирогиндною тож у випадку коли
-    //показники перевищують це число, результатами пидрахунку ми нехтуэмо
-    if(difference <= 10) {
+
+    if(Math.abs(difference) <= 10) {
       projectedMark = term2.average + difference;
     } else {
       if(term1.average > term2.average) {

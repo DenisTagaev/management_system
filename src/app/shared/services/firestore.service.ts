@@ -38,9 +38,7 @@ export class FirestoreService {
 
   async retrieveStudents(){
     this.afsData = [];
-    // const studCol = collection(this._db, 'students')
-    // console.log(prodsCol);
-    
+
     await getDocs(this._studReference)
       .then((res:QuerySnapshot<DocumentData>) => {
         (res.docs.map(doc => {

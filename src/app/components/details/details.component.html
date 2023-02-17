@@ -4,13 +4,13 @@
     <div class="row d-flex justify-content-between">
         <div class="col-4">
             <h4 class="text-center">{{student.name}} {{student.faculty}} {{student.group}}</h4>
-                <h5>Семестр 1</h5>
+                <h5>Term 1</h5>
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th class="text-center" style="border-top-left-radius: 0.5em;">Предмет</th>
-                            <th class="text-center">Оцiнка</th>
-                            <th class="text-center" style="border-top-right-radius: 0.5em;">Коефiцiент</th>
+                            <th class="text-center" style="border-top-left-radius: 0.5em;">Subject</th>
+                            <th class="text-center">Mark</th>
+                            <th class="text-center" style="border-top-right-radius: 0.5em;">Coefficient</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,21 +71,21 @@
                         </tr>
                         <tr>
                             <td colspan="3" class="text-center"  style="border-bottom: none">
-                                Додатковi бали: {{student.term1.extra}}
+                                Extra marks: {{student.term1.extra}}
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-4">
-                <h4 class="text-center">Прогнозована оцiнка {{student.projectedMark.toFixed(3)}}</h4>
-                <h5>Семестр 2</h5>
+                <h4 class="text-center">Projected mark: {{student.projectedMark.toFixed(3)}}</h4>
+                <h5>Term 2</h5>
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th class="text-center" style="border-top-left-radius: 0.5em;">Предмет</th>
-                            <th class="text-center">Оцiнка</th>
-                            <th class="text-center" style="border-top-right-radius: 0.5em;">Коефiцiент</th>
+                            <th class="text-center" style="border-top-left-radius: 0.5em;">Subject</th>
+                            <th class="text-center">Mark</th>
+                            <th class="text-center" style="border-top-right-radius: 0.5em;">Coefficient</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,7 +146,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" class="text-center"  style="border-bottom: none">
-                                Додатковi бали: {{student.term2.extra}}
+                                Extra marks: {{student.term2.extra}}
                             </td>
                         </tr>
                     </tbody>
@@ -155,7 +155,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center" *ngIf="showButton">
-            <button class="btn admin px-4 btn-lg" type="submit" (click)="dropStudent(student.id)">Видалити запис</button>
+            <button class="btn admin px-4 btn-lg" type="submit" (click)="dropStudent(student.id)">Drop student</button>
         </div>
 </div>
 <footer class="footer border border-top-1">
