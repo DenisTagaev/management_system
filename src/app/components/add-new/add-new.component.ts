@@ -76,6 +76,8 @@ export class AddNewComponent implements OnInit {
     this.student.term1.average = this.countAverageMark(this.countCoef(this.student.term1), +this.student.term1.extra);
     this.student.term2.average = this.countAverageMark(this.countCoef(this.student.term2), +this.student.term2.extra)
     this.student.projectedMark = this.calculateProjectedMark(this.student.term1, this.student.term2);
+    this.firestoreService.addStudent(this.student);
+    this.router.navigate(['/dashboard']);
   }
 
   countAverageMark(Sum:number, extra:number):number {
