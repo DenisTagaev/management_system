@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const environment = {
   apiKey: "AIzaSyCA4fq90zlLsWzg_YLFsfCJBOkeWy2Cgao",
   authDomain: "smsys-7e1ba.firebaseapp.com",
   projectId: "smsys-7e1ba",
